@@ -5,8 +5,6 @@ const GameImage = props => {
     return <div>Loading....</div>;
   }
 
-  console.log(props);
-
   return (
     <div className="game-image">
       <img src={props.randomImage.urls.regular} alt="" />

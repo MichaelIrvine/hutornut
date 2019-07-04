@@ -2,11 +2,13 @@ import React from "react";
 import unsplash from "../APIs/Unsplash";
 import GameImage from "./GameImage";
 import GameAnswer from "./GameAnswer";
+import GameResponse from "./GameResponse";
 
 class App extends React.Component {
-  state = { answer: null, image: null, gamePlaying: false };
+  state = { answer: null, image: null, gamePlaying: false, response: null };
 
-  randomImages = async () => {
+  // Makes API request and returns random image matching either "nut" or "nut"
+  fetchImages = async () => {
     const terms = ["hut", "nut"];
     const randomTerm = terms[Math.round(Math.random())];
 
@@ -27,17 +29,12 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.randomImages();
+    this.fetchImages();
   }
 
-  gamePlayState = (boolean) => {
-      if (boolean){
-          this.setState({gamePlaying: true});
-      } else {
-          this.setState({gamePlaying: false});
-      }
-  }
-
+  setPlayState = boolean => {
+    this.setState({ gamePlaying: boolean });
+  };
 
 
   render() {
@@ -46,21 +43,43 @@ class App extends React.Component {
         <div>
           <h2>Hut or Nut</h2>
           <GameImage randomImage={this.state.image} />
-          <GameAnswer correctAnswer={this.state.answer} />
+
+          <GameAnswer
+            correctAnswer={this.state.answer}
+            onResponse={response => this.setState({ response: response })}
+          />
+          {this.state.response && (
+            <GameResponse
+              response={this.state.response}
+              onRestart={() => {
+                this.setState({
+                  response: null,
+                  answer: null,
+                  image: null
+                });
+                this.fetchImages();
+              }}
+            />
+           )} 
         </div>
       );
     } else {
-        return (
-            <div>
-               <h1>Hut Or Nut</h1>
-               <p>Can you choose the correct answer?</p>
-               <div>
-                   <button onClick={() => {this.gamePlayState(true)}}>Start Game</button>
-               </div>
-            </div>
-        )
+      return (
+        <div>
+          <h1>Hut Or Nut</h1>
+          <p>Can you choose the correct answer?</p>
+          <div>
+            <button
+              onClick={() => {
+                this.setPlayState(true);
+              }}
+            >
+              Start Game
+            </button>
+          </div>
+        </div>
+      );
     }
-     
   }
 }
 
