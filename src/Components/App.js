@@ -1,11 +1,18 @@
+import "../SASS/styles.scss";
 import React from "react";
 import unsplash from "../APIs/Unsplash";
 import GameImage from "./GameImage";
 import GameAnswer from "./GameAnswer";
 import GameResponse from "./GameResponse";
 
+
 class App extends React.Component {
-  state = { answer: null, image: null, gamePlaying: false, response: null };
+  state = {
+    answer: null,
+    image: null,
+    gamePlaying: false,
+    response: null
+  };
 
   // Makes API request and returns random image matching either "nut" or "nut"
   fetchImages = async () => {
@@ -30,6 +37,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchImages();
+    
   }
 
   setPlayState = boolean => {
@@ -37,13 +45,18 @@ class App extends React.Component {
   };
 
 
+
   render() {
     if (this.state.gamePlaying) {
       return (
         <div>
           <h2>Hut or Nut</h2>
-          <GameImage randomImage={this.state.image} />
-
+          <div className="game-image_container">
+            <GameImage
+              className="game-image"
+              randomImage={this.state.image}
+            />
+          </div>
           <GameAnswer
             correctAnswer={this.state.answer}
             onResponse={response => this.setState({ response: response })}
@@ -60,7 +73,7 @@ class App extends React.Component {
                 this.fetchImages();
               }}
             />
-           )} 
+          )}
         </div>
       );
     } else {
@@ -68,11 +81,16 @@ class App extends React.Component {
         <div>
           <h1>Hut Or Nut</h1>
           <p>Can you choose the correct answer?</p>
-          <div>
+          <div className="game-image_container">
+            
+          </div>
+          <div className="game-start-container">
             <button
+              className="game-start-button"
               onClick={() => {
                 this.setPlayState(true);
               }}
+              
             >
               Start Game
             </button>

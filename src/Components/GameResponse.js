@@ -1,19 +1,11 @@
 import React from 'react';
 
-const GameResponse = ({response,onRestart}) => {
+const GameResponse = ({onRestart}) => {
 
     const setRandomMessage = () => {
         const messageList = ["Nice Work, Play Again?","You're so smrt. Play Again?", "Right Arm! Uno Mas?"];
 
         return messageList[Math.floor(Math.random() * messageList.length)];
-    }
-
-    if(response === false){
-        return (
-            <div>
-                Incorrect!
-            </div>
-        )
     }
 
     return (
@@ -31,7 +23,7 @@ const GameResponse = ({response,onRestart}) => {
             </button>
             <button
                 onClick={() => {
-                onRestart(false);
+ 
                 }}
             >
             NO
