@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const GameAnswer = ({ correctAnswer, onResponse }) => {
   const handleAnswer = answer => {
     if (answer === correctAnswer) {

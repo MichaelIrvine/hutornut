@@ -1,4 +1,4 @@
-import "../SASS/styles.scss";
+import "../SASS/styles.css";
 import React from "react";
 import unsplash from "../APIs/Unsplash";
 import GameImage from "./GameImage";

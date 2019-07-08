@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AECA,AAEI,qBAFiB,CAEjB,WAAW,CAAC,GAAG,CAAA;EACX,SAAS,EAAE,KAAK;CACnB",
+    "sources": [
+        "styles.scss",
+        "layout/_layout-main.scss",
+        "layout/_game-images.scss"
+    ],
+    "names": [],
+    "file": "styles.css"
+}

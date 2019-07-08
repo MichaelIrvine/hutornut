@@ -1,37 +1,32 @@
-import React from 'react';
+import React from "react";
+import CorrectAnswerMessage from "./CorrectAnswerMessage";
 
-const GameResponse = ({onRestart}) => {
+const GameResponse = ({ onRestart, response }) => {
+  console.log(response); 
 
-    const setRandomMessage = () => {
-        const messageList = ["Nice Work, Play Again?","You're so smrt. Play Again?", "Right Arm! Uno Mas?"];
-
-        return messageList[Math.floor(Math.random() * messageList.length)];
-    }
-
+  if (response === true) {
     return (
-      <div className="game-response">
-        <div className="restart-game_restart-message">
-            <h2>{setRandomMessage()}</h2>
+      <div>
+        <div>
+          <CorrectAnswerMessage />
         </div>
         <div className="restart-game_button-container">
-            <button
-                onClick={() => {
-                onRestart(true);
-                }}
-            >
+          <button
+            onClick={() => {
+              onRestart(true);
+            }}
+          >
             YES
-            </button>
-            <button
-                onClick={() => {
- 
-                }}
-            >
-            NO
-            </button>
+          </button>
+          <button onClick={() => {}}>NO</button>
         </div>
       </div>
     );
-}   
-
+  } else if (response === false){
+    return (
+      <div className="restart-game_button-container">wrong answer</div>
+    );
+  }
+};
 
 export default GameResponse;
