@@ -5,7 +5,6 @@ import GameImage from "./GameImage";
 import GameAnswer from "./GameAnswer";
 import GameResponse from "./GameResponse";
 
-
 class App extends React.Component {
   state = {
     answer: null,
@@ -22,7 +21,8 @@ class App extends React.Component {
     const response = await unsplash.get("search/photos", {
       params: {
         query: randomTerm,
-        per_page: 20
+        per_page: 20,
+        orientation: "squarish"
       }
     });
 
@@ -37,14 +37,11 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchImages();
-    
   }
 
   setPlayState = boolean => {
     this.setState({ gamePlaying: boolean });
   };
-
-
 
   render() {
     if (this.state.gamePlaying) {
@@ -52,10 +49,7 @@ class App extends React.Component {
         <div>
           <h2>Hut or Nut</h2>
           <div className="game-image_container">
-            <GameImage
-              className="game-image"
-              randomImage={this.state.image}
-            />
+            <GameImage className="game-image" randomImage={this.state.image} />
           </div>
           <GameAnswer
             correctAnswer={this.state.answer}
@@ -74,6 +68,7 @@ class App extends React.Component {
               }}
             />
           )}
+
         </div>
       );
     } else {
@@ -81,16 +76,13 @@ class App extends React.Component {
         <div>
           <h1>Hut Or Nut</h1>
           <p>Can you choose the correct answer?</p>
-          <div className="game-image_container">
-            
-          </div>
+          <div className="game-image_container" />
           <div className="game-start-container">
             <button
               className="game-start-button"
               onClick={() => {
                 this.setPlayState(true);
               }}
-              
             >
               Start Game
             </button>
